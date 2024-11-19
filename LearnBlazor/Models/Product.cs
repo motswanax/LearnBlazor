@@ -6,5 +6,5 @@ public class Product
     public string Name { get; set; }
     public bool IsActive { get; set; }
     public decimal Price { get; set; }
-    public IEnumerable<ProductProp> ProductProperties { get; set; }
+    public List<ProductProp> ProductProperties { get; set; }
 }
