@@ -1,0 +1,71 @@
+﻿@page "/learnBlazor/demoProduct"
+<h2 class="text-primary">DemoProduct</h2>
+<div class="p-2 mt-2">
+    <div class="row mb-2">
+        @foreach (var prod in Products)
+        {
+            <div class="bg-light border col-6 py-2">
+                <h4 class="text-secondary">Product @prod.Id</h4>
+                Name - @prod.Name
+                <br />
+                Show Propoerties: <input type="checkbox" @bind="prod.IsActive" />
+                <br />
+                @if (prod.IsActive)
+                {
+                    @foreach (var prodProp in prod.ProductProperties)
+                    {
+                        <p>@prodProp.Key - @prodProp.Value</p>
+                    }
+                }
+                <br />
+                <input type="button" class="btn btn-danger" style="width: 100px;" value="Delete" />
+            </div>
+        }
+    </div>
+    <div class="row">
+        <div class="col align-content-center">
+            <input type="button" class="btn btn-success me-1" style="width: 100px;" value="Counter" @onclick="IncrementCount" />
+            Count: @Count
+        </div>
+    </div>
+</div>
+
+@code {
+    public int Count { get; set; } = 0;
+
+    List<Product> Products = new();
+
+    protected override void OnInitialized()
+    {
+        Products.Add(new()
+        {
+            Id = 1,
+            Name = "Midnight Blaze",
+            IsActive = false,
+            ProductProperties = new()
+{
+                new ProductProp { Id = 1, Key = "Flavor", Value = "Rose"},
+                new ProductProp { Id = 2, Key = "Size", Value = "20oz"},
+                new ProductProp { Id = 3, Key = "Color", Value="Purple" },
+            }
+        });
+
+        Products.Add(new()
+        {
+            Id = 2,
+            Name = "Blossom Lily",
+            IsActive = true,
+            ProductProperties = new()
+{
+                new ProductProp { Id = 1, Key = "Flavor", Value = "Lily" },
+                new ProductProp { Id = 2, Key = "Size", Value = "18oz" },
+                new ProductProp {Id = 3,Key = "Color",Value = "White"},
+            }
+        });
+    }
+
+    private void IncrementCount()
+    {
+        Count++;
+    }
+}
