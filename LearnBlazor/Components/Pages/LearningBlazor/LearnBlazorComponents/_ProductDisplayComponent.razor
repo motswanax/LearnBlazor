@@ -1,5 +1,9 @@
-﻿<div class="bg-light border col-6 py-2">
+﻿<div class="bg-light border col-6 py-2" @onclick="(args) => SelectedProductUpdated(args, Product.Name)">
     <h4 class="text-secondary">Product @Product.Id</h4>
+
+    <input type="checkbox" @onchange="FavouriteUpdated" /> Add to Favourites  <!-- This should update the favourite count in the parent component. -->
+    <br /><br />
+
     Name - @Product.Name
     <br />
     Show Properties: <input type="checkbox" @bind="Product.IsActive" />
@@ -18,4 +22,21 @@
 @code {
     [Parameter]
     public required Product Product { get; set; }
+
+    [Parameter]
+    public EventCallback<bool> OnFavouriteUpdated { get; set; }
+
+    [Parameter]
+    public EventCallback<string> OnSelectedProductChange { get; set; }
+
+    // Event callback function
+    private async Task FavouriteUpdated(ChangeEventArgs args)
+    {
+        await OnFavouriteUpdated.InvokeAsync((bool)(args.Value ?? false));
+    }
+
+    private async Task SelectedProductUpdated(MouseEventArgs args, string productName)
+    {
+        await OnSelectedProductChange.InvokeAsync(productName);
+    }
 }

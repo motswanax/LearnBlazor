@@ -1,17 +1,20 @@
 ﻿@page "/learnBlazor/demoProduct"
 
 <h2 class="text-primary">DemoProduct</h2>
+<p>Favourite Count: @FavouriteCount</p> <!-- To update this from the child component, event callback is used -->
+<p>Selected Product: @SelectedProduct</p>
 <div class="p-2 mt-2">
     <div class="row mb-2">
         @foreach (var prod in Products)
         {
-            <_ProductDisplayComponent Product="prod" />
+            <_ProductDisplayComponent Product="prod" OnFavouriteUpdated="FavouriteCountChange" OnSelectedProductChange="UpdateSelectedProduct" />
         }
     </div>
 </div>
 
 @code {
-
+    public int FavouriteCount { get; set; } = 0;
+    public string SelectedProduct { get; set; } = string.Empty;
     List<Product> Products = new();
 
     protected override void OnInitialized()
@@ -41,5 +44,18 @@
                 new ProductProp {Id = 3,Key = "Color",Value = "White"},
             }
         });
+    }
+
+    protected void FavouriteCountChange(bool isSelected)
+    {
+        if (isSelected)
+            FavouriteCount++;
+        else
+            FavouriteCount--;
+    }
+
+    protected void UpdateSelectedProduct(string productName)
+    {
+        SelectedProduct = productName;
     }
 }
