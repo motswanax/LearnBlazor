@@ -5,36 +5,12 @@
     <div class="row mb-2">
         @foreach (var prod in Products)
         {
-            <div class="bg-light border col-6 py-2">
-                <h4 class="text-secondary">Product @prod.Id</h4>
-                Name - @prod.Name
-                <br />
-                Show Propoerties: <input type="checkbox" @bind="prod.IsActive" />
-                <br />
-                @if (prod.IsActive)
-                {
-                    @foreach (var prodProp in prod.ProductProperties)
-                    {
-                        <p>@prodProp.Key - @prodProp.Value</p>
-                    }
-                }
-                <br />
-                <_DeleteButtonComponent ProductId="@prod.Id" ProductName="@prod.Name">
-
-                </_DeleteButtonComponent>
-            </div>
+            <_ProductDisplayComponent Product="prod" />
         }
-    </div>
-    <div class="row">
-        <div class="col align-content-center">
-            <input type="button" class="btn btn-success me-1" style="width: 100px;" value="Counter" @onclick="@(() => IncrementCount(5))" />
-            Count: @Count
-        </div>
     </div>
 </div>
 
 @code {
-    public int Count { get; set; } = 0;
 
     List<Product> Products = new();
 
@@ -65,10 +41,5 @@
                 new ProductProp {Id = 3,Key = "Color",Value = "White"},
             }
         });
-    }
-
-    private void IncrementCount(int counter)
-    {
-        Count += counter;
     }
 }

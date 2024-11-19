@@ -1,0 +1,21 @@
+﻿<div class="bg-light border col-6 py-2">
+    <h4 class="text-secondary">Product @Product.Id</h4>
+    Name - @Product.Name
+    <br />
+    Show Properties: <input type="checkbox" @bind="Product.IsActive" />
+    <br />
+    @if (Product.IsActive)
+    {
+        @foreach (var prodProp in Product.ProductProperties)
+        {
+            <p>@prodProp.Key - @prodProp.Value</p>
+        }
+    }
+    <br />
+    <_DeleteButtonComponent ProductId="@Product.Id" ProductName="@Product.Name" />
+</div>
+
+@code {
+    [Parameter]
+    public required Product Product { get; set; }
+}
