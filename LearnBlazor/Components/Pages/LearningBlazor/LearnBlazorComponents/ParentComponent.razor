@@ -2,14 +2,11 @@
 
 <h3>ParentComponent</h3>
 
-<_ChildComponent OnButtonClick="ShowMessage" Title="This title is passed as a pameter from parent component">
+<_ChildComponent OnButtonClick="ShowMessage" Title="This title is passed as a pameter from parent component" MessageForGrandChild="This message is passed from Child Component">
     Some text between the tags from parent component!
 </_ChildComponent>
 
 <p>@messageText</p>
-
-<_ChildComponent Title="This title is passed as a pameter from parent component">
-</_ChildComponent>
 
 @code {
     public string messageText = "";

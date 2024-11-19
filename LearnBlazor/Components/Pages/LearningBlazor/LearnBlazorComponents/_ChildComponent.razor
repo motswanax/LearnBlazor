@@ -9,6 +9,8 @@
         </div>
     }
     <button class="btn btn-danger" @onclick="OnButtonClick">Click Me</button>
+
+    <_GrandChildComponent  MessageForGrandChild="@MessageForGrandChild"/>
 </div>
 
 @code {
@@ -20,4 +22,7 @@
 
     [Parameter]
     public EventCallback OnButtonClick { get; set; }
+
+    [Parameter]
+    public string? MessageForGrandChild { get; set; }
 }
