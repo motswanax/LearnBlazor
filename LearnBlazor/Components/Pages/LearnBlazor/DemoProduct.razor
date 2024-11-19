@@ -18,13 +18,13 @@
                     }
                 }
                 <br />
-                <input type="button" class="btn btn-danger" style="width: 100px;" value="Delete" />
+                <input type="button" class="btn btn-danger" style="width: 100px;" value="Delete" @onclick="() => RemoveProduct(prod.Id)" />
             </div>
         }
     </div>
     <div class="row">
         <div class="col align-content-center">
-            <input type="button" class="btn btn-success me-1" style="width: 100px;" value="Counter" @onclick="IncrementCount" />
+            <input type="button" class="btn btn-success me-1" style="width: 100px;" value="Counter" @onclick="@(() => IncrementCount(5))" />
             Count: @Count
         </div>
     </div>
@@ -64,8 +64,15 @@
         });
     }
 
-    private void IncrementCount()
+    private void IncrementCount(int counter)
     {
-        Count++;
+        Count += counter;
+    }
+
+    private void RemoveProduct(int productId)
+    {
+        var prod = Products.FirstOrDefault(p => p.Id == productId);
+        if (prod is not null)
+            Products.Remove(prod);
     }
 }
