@@ -1,39 +1,47 @@
 ﻿@page "/learnBlazor/bindprop"
-@using Models
 
-<h3>Product - Data Binding</h3>
+<div class="row">
+    <div class="col-6 border p-3">
+        <h3 class="text-primary">Product Playground</h3>
+        <hr />
+        IsActive:
+        <input type="checkbox" @bind="@Product.IsActive" />
+        <br />
 
-Name: @Product.Name
-<br />
-IsActive: @Product.IsActive
-<br />
-Price: @Product.Price
-<br />
-This Product is: @(Product.IsActive ? "Active" : "Inactive")
-<br />
-IsActive:
-<input type="checkbox" @bind="@Product.IsActive" />
-<br />
+        Input Price:
+        <input type="number" @bind="@Product.Price" @bind:event="oninput" />
+        <br />
+        <br />
 
-Input Price:
-<input type="number" @bind="@Product.Price" @bind:event="oninput" />
-<br />
-<br />
+        Product Properties:
+        <select @bind="selectedProp">
+            @foreach (var prop in Product.ProductProperties)
+            {
+                <option value="@prop.Key">@prop.Key</option>
+            }
+        </select>
+    </div>
+    <div class="col-6 border p-3">
+        <h3 class="text-primary">Product - Summary</h3>
 
-Product Properties: 
-<select @bind="selectedProp">
-    @foreach (var prop in Product.ProductProperties)
-    {
-        <option value="@prop.Key">@prop.Key</option>
-    }
-</select>
-<br />
-Selected Prop: @selectedProp
+        Name: @Product.Name
+        <br />
+        IsActive: @Product.IsActive
+        <br />
+        Price: @Product.Price
+        <br />
+        This Product is: @(Product.IsActive ? "Active" : "Inactive")
+        <br />
 
-@if (!string.IsNullOrEmpty(selectedProp))
-{
-    <p>Selected Value: @Product.ProductProperties.FirstOrDefault(p => p.Key.Equals(selectedProp)).Value</p>
-}
+        <br />
+        Selected Prop: @selectedProp
+
+        @if (!string.IsNullOrEmpty(selectedProp))
+        {
+            <p>Selected Value: @Product.ProductProperties.FirstOrDefault(p => p.Key.Equals(selectedProp)).Value</p>
+        }
+    </div>
+</div>
 
 @code {
     private string selectedProp = string.Empty;
