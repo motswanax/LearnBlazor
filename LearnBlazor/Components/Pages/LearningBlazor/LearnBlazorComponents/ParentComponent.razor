@@ -1,10 +1,12 @@
 ﻿@page "/learnBlazor/parentComponent"
 
 <h3>ParentComponent</h3>
-<CascadingValue Value="@MessageForGrandChild">
-    <_ChildComponent OnButtonClick="ShowMessage" Title="This title is passed as a pameter from parent component">
-        Some text between the tags from parent component!
-    </_ChildComponent>
+<CascadingValue Value="@MessageForGrandChild" Name="Message">
+    <CascadingValue Value="@LuckyNumber" Name="LuckyNumber">
+        <_ChildComponent OnButtonClick="ShowMessage" Title="This title is passed as a pameter from parent component">
+            Some text between the tags from parent component!
+        </_ChildComponent>
+    </CascadingValue>
 </CascadingValue>
 
 
@@ -12,6 +14,7 @@
 
 @code {
     private string MessageForGrandChild = "This message is passed from Child Component";
+    private int LuckyNumber = 7;
     public string messageText = "";
 
     private void ShowMessage()
