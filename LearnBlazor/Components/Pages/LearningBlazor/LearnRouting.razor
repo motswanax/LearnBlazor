@@ -1,0 +1,26 @@
+﻿@page "/learnRouting"
+@page "/learnRouting/{Param1:int}"
+@page "/learnRouting/{Param1:int}/{Param2}"
+@page "/learnBlazor/learnRouting"
+@page "/learnRouting/catch-all/{*PageParameters}"
+
+<h3>LearnRouting</h3>
+
+<p>Param1: @Param1</p>  
+<p>Param2: @Param2</p> 
+<p>Page Parameters: @PageParameters</p> 
+
+<div class="bg-info" style="height: 1000px;"></div>
+
+<h2 id="targetElement">Main title</h2> 
+
+@code {
+    [Parameter]
+    public int Param1 { get; set; }
+
+    [Parameter]
+    public string? Param2 { get; set; } = string.Empty;
+
+    [Parameter]
+    public string? PageParameters { get; set; } = string.Empty;
+}
