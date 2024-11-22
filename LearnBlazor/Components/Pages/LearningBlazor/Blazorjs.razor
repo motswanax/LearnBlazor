@@ -4,7 +4,9 @@
 <h3>Blazor JS</h3>
 
 <div class="row">
-    <button class="btn btn-secondary" @onclick="TestConfirmBox">Test Confirm Button</button>
+    <div class="d-grid gap-2 d-md-block">
+        <button class="btn btn-secondary" @onclick="TestConfirmBox">Test Confirm Button</button>
+    </div>
 </div>
 
 <div class="row">
@@ -19,8 +21,10 @@
 </div>
 
 <div class="row">
-    <button class="btn btn-success" @onclick="ToastrSuccess">Toastr Success</button>
-    <button class="btn btn-danger" @onclick="ToastrError">Toastr Failure</button>
+    <div class="d-grid gap-2 d-md-block">
+        <button class="btn btn-success" type="button" @onclick="ToastrSuccess">Toastr Success</button>
+        <button class="btn btn-danger" type="button" @onclick="ToastrError">Toastr Failure</button>
+    </div>
 </div>
 
 @code {
